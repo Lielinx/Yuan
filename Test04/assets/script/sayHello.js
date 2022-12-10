@@ -134,8 +134,8 @@ cc.Class({
                 for(let i=0;i<children.length;i++){
                     child = children[i];
                 };
-                child.width += 1;
-                child.height += 1;
+                child.width += 5;
+                child.height += 5;
                 child.name = yuanName;
                 this.fnum += 1;
                 if(this.fnum%10==2){

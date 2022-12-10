@@ -47,9 +47,15 @@ cc.Class({
         this.touchFlag = false,
         this.touchStartTime = null;
         this.fnum = 1; 
+        //圆的节点名称
+        this.FirstyuanName = "yuan"
+        //圆的序号
+        this.yuanNum = 0
+        
 
         cc.log("onload>>>")
         this.node.on(cc.Node.EventType.TOUCH_START,function(event){
+            this.yuanNum += 1;
             this.yuanStatus = true,
             this.touchFlag = true;
             this.touchStartTime = new Date();
@@ -112,7 +118,7 @@ cc.Class({
         // let childByName = this.node.getChildByName("Cannon");
         // cc.log(childByName.name);
     // },
-    touchHold(){
+    touchHold(yuanName){
         if(this.yuanStatus&&this.touchFlag && this.touchStartTime !=null){
             let touchHoldTime = new Date();
             let milliseconds = touchHoldTime.getTime() - this.touchStartTime.getTime();
@@ -130,9 +136,11 @@ cc.Class({
                 };
                 child.width += 1;
                 child.height += 1;
+                child.name = yuanName;
                 this.fnum += 1;
                 if(this.fnum%10==2){
                     cc.log(this.fnum);
+                    cc.log(child.name)
                     child.color = new cc.Color(color1,color2,color3);
                 };
                 // this.node.color = new cc.Color(color1,color2,color3);
@@ -145,10 +153,12 @@ cc.Class({
             // }
         }
     },
+    
 
     update (dt) {
         if(this.touchFlag){
-            this.touchHold();
+            let yuanName = this.FirstyuanName + this.yuanNum;
+            this.touchHold(yuanName);
         }
     },
     // lateUpdate(dt){
